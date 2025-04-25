@@ -33,7 +33,7 @@ export default function HomeScreen() {
       {/* Body */}
       <View style={styles.body}>
           <TouchableOpacity style={styles.button} onPress={handleCameraPress}>
-            <Text style={styles.buttonText}>Open Camera</Text>
+            <Text style={styles.buttonText}>Open Cmera</Text>
           </TouchableOpacity>
 
       </View>
