@@ -1,8 +1,28 @@
 // HomeScreen.js
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { launchCamera } from 'react-native-image-picker';
 
 export default function HomeScreen() {
+  const handleCameraPress = () => {
+    launchCamera(
+      {
+        mediaType: 'photo',
+        cameraType: 'back',
+        saveToPhotos: true,
+      },
+      (response) => {
+        if (response.didCancel) {
+          console.log('User cancelled camera');
+        } else if (response.errorCode) {
+          console.error('Camera Error: ', response.errorMessage);
+        } else {
+          console.log('Image captured:', response.assets[0].uri);
+        }
+      }
+    );
+  };
+  
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -12,9 +32,10 @@ export default function HomeScreen() {
 
       {/* Body */}
       <View style={styles.body}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Press Me</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleCameraPress}>
+            <Text style={styles.buttonText}>Open Camera</Text>
+          </TouchableOpacity>
+
       </View>
 
       {/* Footer */}
